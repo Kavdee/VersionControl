@@ -16,6 +16,5 @@ namespace week4
         {
             InitializeComponent();
         }
-
     }
 }
