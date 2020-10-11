@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,14 @@ namespace week05
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek = new List<decimal>();
         public Form1()
         {
             InitializeComponent();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
-            List<decimal> Nyereségek = new List<decimal>();
+            
             int intervalum = 30;
             DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -67,6 +69,30 @@ namespace week05
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "file.txt";
+            sfd.Filter = ".txt";
+            if (sfd.ShowDialog()==DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(sfd.OpenFile());
+                sw.Write("Időszak");
+                sw.Write(";");
+                sw.Write("Nyereség");
+                sw.WriteLine();
+                int szamlalo = 0;
+                foreach (var x in Nyereségek)
+                {
+                    sw.Write(szamlalo);
+                    sw.Write(" ");
+                    sw.Write(x);
+                    sw.WriteLine();
+                    szamlalo++;
+                }
+            }
         }
     }
 }
