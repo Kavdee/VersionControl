@@ -18,13 +18,22 @@ namespace week06
     {
         BindingList<RateDate> Rates = new BindingList<RateDate>();
         string result;
+        BindingList<string> Currencies = new BindingList<string>();
+        
         public Form1()
         {
             InitializeComponent();
+            DataRefresh();
+        }
+
+        private void DataRefresh()
+        {
+            Rates.Clear();
             Callwebservice();
             dataGridView1.DataSource = Rates;
             XMLfeldolgozas();
             Charting();
+            comboBox1.DataSource = Currencies;
         }
 
         private void Charting()
@@ -70,12 +79,27 @@ namespace week06
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                currencyNames = (string)comboBox1.SelectedItem,
+                startDate = Convert.ToString(dateTimePicker1.Value),
+                endDate = Convert.ToString(dateTimePicker2.Value)
             };
             var response = mnbService.GetExchangeRates(request);
             result = response.GetExchangeRatesResult;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DataRefresh();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            DataRefresh();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRefresh();
         }
     }
 }
