@@ -35,11 +35,13 @@
             this.lblNext = new System.Windows.Forms.Label();
             this.btnSelectBall = new System.Windows.Forms.Button();
             this.btnSelectCar = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.btnColor);
             this.mainPanel.Controls.Add(this.btnSelectCar);
             this.mainPanel.Controls.Add(this.btnSelectBall);
             this.mainPanel.Controls.Add(this.lblNext);
@@ -89,6 +91,16 @@
             this.btnSelectCar.UseVisualStyleBackColor = true;
             this.btnSelectCar.Click += new System.EventHandler(this.btnSelectCar_Click);
             // 
+            // btnColor
+            // 
+            this.btnColor.BackColor = System.Drawing.Color.Fuchsia;
+            this.btnColor.Location = new System.Drawing.Point(494, 30);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 23);
+            this.btnColor.TabIndex = 3;
+            this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.Button btnSelectCar;
         private System.Windows.Forms.Button btnSelectBall;
         private System.Windows.Forms.Label lblNext;
+        private System.Windows.Forms.Button btnColor;
     }
 }
 
